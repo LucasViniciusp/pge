@@ -85,4 +85,4 @@ class Lotacao(models.Model):
 
 
     def __str__(self):
-        return f'{self.professor} - {self.disciplina} - {self.ano_letivo}'.format()
+        return f'{self.turma} - {self.professor} - {self.disciplina} - {self.ano_letivo}'.format()

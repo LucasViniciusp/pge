@@ -12,6 +12,7 @@ class EscolaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Escola
         fields = ['id', 'name', 'diretor']
+        depth = 1
 
 
 class AnoLetivoSerializer(serializers.ModelSerializer):
@@ -24,6 +25,7 @@ class TurmaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Turma
         fields = ['id', 'escola', 'name']
+        depth = 1
 
 
 class AlunoSerializer(serializers.ModelSerializer):
@@ -36,6 +38,7 @@ class MatriculaAlunoSerializer(serializers.ModelSerializer):
     class Meta:
         model = MatriculaAluno
         fields = ['id', 'aluno', 'turma', 'ano_letivo']
+        depth = 1
 
 
 class ProfessorSerializer(serializers.ModelSerializer):
@@ -51,6 +54,8 @@ class DisciplinaSerializer(serializers.ModelSerializer):
 
 
 class LotacaoSerializer(serializers.ModelSerializer):
+    # turma = TurmaSerializer(many=False)
     class Meta:
         model = Lotacao
         fields = ['id', 'turma', 'professor', 'disciplina', 'ano_letivo']
+        depth = 1

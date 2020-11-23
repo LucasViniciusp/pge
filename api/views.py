@@ -219,7 +219,6 @@ class MatriculaDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
 class ProfessorList(APIView):
 
     def get(self, request, format=None):
@@ -344,7 +343,7 @@ class AlunoDetail(APIView):
         aluno = self.get_object(pk)
         aluno.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-###
+
 
 class AnoLetivoList(APIView):
 
@@ -359,7 +358,7 @@ class AnoLetivoList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
 
 class AnoLetivoDetail(APIView):
 

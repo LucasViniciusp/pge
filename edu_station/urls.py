@@ -13,9 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import include, path
-
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from  api import views
 
 
@@ -31,7 +32,7 @@ urlpatterns = [
     path('escolas/<int:pk_escola>/turmas/<int:pk_turma>/matriculas/<int:pk_matricula>', views.MatriculaDetail.as_view()),
 
     path('diretores/', views.DiretorList.as_view()),
-    path('diretores/<int:pk>', views.DiretorDetail.as_view()),
+    path('diretores/<int:pk>', views.DiretorDetail.as_view(),name='diretor-detail'),
 
     path('alunos/', views.AlunoList.as_view()),
     path('alunos/<int:pk>', views.AlunoDetail.as_view()),
@@ -45,5 +46,9 @@ urlpatterns = [
     path('anoletivo/', views.AnoLetivoList.as_view()),  
     path('anoletivo/<int:pk>', views.AnoLetivoDetail.as_view()),  
 
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
 ]

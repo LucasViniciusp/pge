@@ -1,10 +1,11 @@
 from .models import *
 from rest_framework import serializers
+from rest_framework.reverse import reverse
+from django.contrib.auth.models import User
 
-
-class UserSerializer(serializers.ModelSerializer):
+class DiretorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Diretor
         fields = ['id', 'name']
 
 
@@ -24,7 +25,7 @@ class AnoLetivoSerializer(serializers.ModelSerializer):
 class TurmaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Turma
-        fields = ['id', 'escola', 'name']
+        fields = ['id' ,'name', 'escola']
         depth = 1
 
 
@@ -54,8 +55,14 @@ class DisciplinaSerializer(serializers.ModelSerializer):
 
 
 class LotacaoSerializer(serializers.ModelSerializer):
-    # turma = TurmaSerializer(many=False)
     class Meta:
         model = Lotacao
         fields = ['id', 'turma', 'professor', 'disciplina', 'ano_letivo']
         depth = 1
+
+
+class LoginSerializer(serializers.ModelSerializer):
+    fields = ['username', 'password']
+
+class TokenSerializer(serializers.ModelSerializer):
+    fields = ['access', 'refresh']

@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class User(models.Model):
+class Diretor(models.Model):
     name = models.CharField(max_length=30, unique=True)
 
     def __str__(self):
@@ -10,7 +10,7 @@ class User(models.Model):
 
 class Escola(models.Model):
     name = models.CharField(max_length=30, unique=True)
-    diretor = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    diretor = models.OneToOneField(Diretor, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -44,11 +44,10 @@ class MatriculaAluno(models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
     ano_letivo = models.ForeignKey(AnoLetivo, on_delete=models.CASCADE)
 
-
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['aluno', 'turma', 'ano_letivo'],
-            name='conjunto aluno-turma-ano unico por matricula')
+            models.UniqueConstraint(fields=['aluno', 'ano_letivo'],
+            name='Aluno não pode ter 2 matriculas no mesmo Ano Letivo')
         ]
 
 
